@@ -24,5 +24,5 @@ expense summary
 ## How to run
 Example:
 ```sh
-go run main.go add --amount 25.5 --category food --note "hello"
+go run . add --amount 25.5 --category food --note "hello"
 ```

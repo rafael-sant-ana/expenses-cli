@@ -5,15 +5,26 @@ import (
 	"os"
 	"flag"
 	"expenses-tracker/expense"
+	"expenses-tracker/store"
 	"github.com/google/uuid"
 	"time"
 )
+
+var expensesStore store.Store
 
 func main() {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
 		fmt.Println("Execute it with `add`, `list` or `summary`")
+		return
+	}
+	var err error
+
+	expensesStore, err = store.NewStore("./store.json")
+
+	if err != nil {
+		fmt.Println("erro carregando")
 		return
 	}
 
@@ -44,11 +55,11 @@ func addExpenses(args []string) {
 		time.Now(),
 	}
 
-	fmt.Println(newExpense)
+	expensesStore.Add(newExpense)
 }
 
 func listExpenses(args []string) {
-
+	fmt.Println(expensesStore.List())
 }
 
 func summaryExpenses(args []string) {
