@@ -21,7 +21,7 @@ func main() {
 	}
 	var err error
 
-	expensesStore, err = store.NewStore("./store.json")
+	expensesStore, err = store.NewStore("./tmp/store.json")
 
 	if err != nil {
 		fmt.Println("erro carregando")
