@@ -65,14 +65,28 @@ func listExpenses(args []string) {
 	for i := range len(expenses) {
 		expense := expenses[i]
 		fmt.Println("--- ", (i+1), " ---")
-		fmt.Println("Amount: ", expense.Amount)
-		fmt.Println("Category: ", expense.Category)
-		fmt.Println("Note: ", expense.Note)
+		fmt.Println("ID:", expense.ID)
+		fmt.Println("Amount:", expense.Amount)
+		fmt.Println("Category:", expense.Category)
+		fmt.Println("Note:", expense.Note)
 	}
 
 	fmt.Println("--- END ---")
 }
 
 func summaryExpenses(args []string) {
+	// TODO: Filter transacitons in month, ideal usage: expenses summary --range 05-2026
+	// Maybe later on add a --rangeBegin and --RangeEnd
+	var totalSpent float64 = 0
 
+	var expenses []expense.Expense
+	expenses = expensesStore.List()
+
+	for _, expense := range expenses {
+		totalSpent = totalSpent + expense.Amount
+	}
+
+	fmt.Println("Total transactioned in range:", totalSpent)
 }
+
+// TODO: Implement a --delete ID
