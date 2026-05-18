@@ -59,7 +59,18 @@ func addExpenses(args []string) {
 }
 
 func listExpenses(args []string) {
-	fmt.Println(expensesStore.List())
+	var expenses []expense.Expense
+	expenses = expensesStore.List()
+
+	for i := range len(expenses) {
+		expense := expenses[i]
+		fmt.Println("--- ", (i+1), " ---")
+		fmt.Println("Amount: ", expense.Amount)
+		fmt.Println("Category: ", expense.Category)
+		fmt.Println("Note: ", expense.Note)
+	}
+
+	fmt.Println("--- END ---")
 }
 
 func summaryExpenses(args []string) {
